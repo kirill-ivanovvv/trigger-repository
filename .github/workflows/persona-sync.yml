@@ -29,7 +29,7 @@ jobs:
 
       - name: Trigger sync on another repo
         run: |
-          gh workflow run sync-original-repo.yml --repo personaclick/demo-android@master
+          gh workflow run sync-original-repo.yml --repo personaclick/demo-android
           # gh repo view personaclick/demo-android
           # gh api \
           # --method POST \
