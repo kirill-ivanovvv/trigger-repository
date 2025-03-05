@@ -32,7 +32,7 @@ jobs:
           --method POST \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          /repos/OWNER/REPO/dispatches \
-          -f "event_type=on-demand-test" -F "client_payload[unit]=false" -F "client_payload[integration]=true"
+          /repos/PersonaClick/demo-android/dispatches \
+          -f "event_type=sync"
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
