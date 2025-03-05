@@ -1,31 +1,30 @@
 name: Persona sync
 
 on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
   run:
+    if: github.event.pull_request.merged == true
     name: Trigger Synchronization
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@v1
-        id: app-token
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          # required
+          fetch-depth: 0
+
+      - run: ls -a -R
+
+      - name: Dispatch action
+        uses: ./.github/actions/dispatch
+        with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-
-      # - name: Get GitHub App User ID
-      #   id: get-user-id
-      #   run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-      #   env:
-      #     GH_TOKEN: ${{ steps.app-token.outputs.token }}
-      # - run: |
-      #     git config --global user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
-      #     git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
-
-      - name: Trigger sync on another repo
-        run: |
-          gh workflow run sync-original-repo.yml --repo PersonaClick/demo-android
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          owner: personaclick
+          repositories: demo-android
