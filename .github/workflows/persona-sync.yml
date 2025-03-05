@@ -26,6 +26,6 @@ jobs:
 
       - name: Trigger sync on another repo
         run: |
-          gh workflow run sync-original-repo.yml --repo PersonaClick/demo-android
+          gh workflow run sync-original-repo.yml --repo personaclick/demo-android
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
