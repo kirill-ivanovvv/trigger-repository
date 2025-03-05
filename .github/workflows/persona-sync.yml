@@ -18,8 +18,8 @@ jobs:
       - name: Dispatch action
         uses: ./.github/actions/dispatch
         with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.PRIVATE_KEY }}
+          appId: ${{ vars.APP_ID }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
           owner: personaclick
           repositories: |
             demo-android
