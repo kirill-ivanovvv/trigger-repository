@@ -16,7 +16,7 @@ jobs:
       - run: ls -a -R
 
       - name: Dispatch action
-        uses: ./github/actions/dispatch
+        uses: ./.github/actions/dispatch
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
