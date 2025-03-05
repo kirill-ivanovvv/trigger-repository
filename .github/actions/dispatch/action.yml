@@ -26,7 +26,6 @@ runs:
         private-key: ${{ inputs.privateKey }}
         owner: ${{inputs.owner}}
         repositories: ${inputs.owner}
-      shell: bash
 
     - name: Trigger sync on another repo
       run: |
