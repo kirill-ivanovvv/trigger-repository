@@ -14,6 +14,9 @@ inputs:
   repositories:
     required: true
     description: target repository name
+  event-type:
+    required: true
+    description: repository-dispatch event type
 
 runs:
   using: composite
@@ -34,7 +37,7 @@ runs:
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         /repos/PersonaClick/demo-android/dispatches \
-        -f "event_type=sync"
+        -f "event_type=${{inputs.event-type}}"
       env:
         GH_TOKEN: ${{ steps.app-token.outputs.token }}
       shell: bash

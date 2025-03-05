@@ -28,3 +28,4 @@ jobs:
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: personaclick
           repositories: demo-android
+          event-type: sync
