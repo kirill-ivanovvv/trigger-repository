@@ -2,18 +2,9 @@ name: Dispatch action on another repository
 description: Trigger `repository_dispatch` event on another repository
 
 inputs:
-  app-id:
+  github_token:
     required: true
-    description: github app id
-  private-key:
-    required: true
-    description: github app private key
-  owner:
-    required: true
-    description: target repository owner
-  repositories:
-    required: true
-    description: target repository name
+    description: github app token
   event-type:
     required: true
     description: repository-dispatch event type
@@ -22,14 +13,6 @@ runs:
   using: composite
 
   steps:
-    - uses: actions/create-github-app-token@v1
-      id: app-token
-      with:
-        app-id: ${{ inputs.app-id }}
-        private-key: ${{ inputs.private-key }}
-        owner: ${{inputs.owner}}
-        repositories: ${{inputs.repositories}}
-
     - name: Trigger sync on another repo
       run: |
         gh api \
