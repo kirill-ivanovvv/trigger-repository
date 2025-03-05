@@ -14,7 +14,9 @@ jobs:
           # required
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
+          owner: personaclick
+          repositories: |
+            demo-android
 
       # - name: Get GitHub App User ID
       #   id: get-user-id
