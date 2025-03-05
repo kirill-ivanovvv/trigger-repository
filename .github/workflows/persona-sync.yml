@@ -21,5 +21,4 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: personaclick
-          repositories: |
-            demo-android
+          repositories: demo-android
