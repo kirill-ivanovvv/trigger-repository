@@ -19,13 +19,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: ls -a -R
-
-      - name: Dispatch action
-        uses: ./.github/actions/dispatch
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: personaclick
           repositories: demo-android
+
+      - name: Dispatch action
+        uses: ./.github/actions/dispatch
+        with:
+          github_token: ${{ steps.app-token.outputs.token }}
           event-type: sync
