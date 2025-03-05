@@ -1,0 +1,41 @@
+name: Dispatch action on another repository
+description: Trigger `repository_dispatch` event on another repository
+
+inputs:
+  appId:
+    required: true
+    description: github app id
+  privateKey:
+    required: true
+    description: github app private key
+  owner:
+    required: true
+    description: target repository owner
+  repository:
+    required: true
+    description: target repository name
+
+runs:
+  using: composite
+
+  steps:
+    - uses: actions/create-github-app-token@v1
+      id: app-token
+      with:
+        app-id: ${{ inputs.appId }}
+        private-key: ${{ inputs.privateKey }}
+        owner: ${{inputs.owner}}
+        repositories: ${inputs.owner}
+      shell: bash
+
+    - name: Trigger sync on another repo
+      run: |
+        gh api \
+        --method POST \
+        -H "Accept: application/vnd.github+json" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        /repos/PersonaClick/demo-android/dispatches \
+        -f "event_type=sync"
+      env:
+        GH_TOKEN: ${{ steps.app-token.outputs.token }}
+      shell: bash
