@@ -11,7 +11,7 @@ inputs:
   owner:
     required: true
     description: target repository owner
-  repository:
+  repositories:
     required: true
     description: target repository name
 
@@ -25,7 +25,7 @@ runs:
         app-id: ${{ inputs.app-id }}
         private-key: ${{ inputs.private-key }}
         owner: ${{inputs.owner}}
-        repository: ${inputs.repository}
+        repositories: ${inputs.repositories}
 
     - name: Trigger sync on another repo
       run: |
