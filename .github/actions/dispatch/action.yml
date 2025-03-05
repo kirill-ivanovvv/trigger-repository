@@ -22,5 +22,5 @@ runs:
         /repos/PersonaClick/demo-android/dispatches \
         -f "event_type=${{inputs.event-type}}"
       env:
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        GH_TOKEN: ${{ inputs.github_token }}
       shell: bash
