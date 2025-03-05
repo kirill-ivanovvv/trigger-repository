@@ -27,6 +27,12 @@ jobs:
       - name: Trigger sync on another repo
         run: |
           # gh workflow run sync-original-repo.yml --repo personaclick/demo-android@master
-          gh repo view https://github.com/PersonaClick/demo-android
+          # gh repo view personaclick/demo-android
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/OWNER/REPO/dispatches \
+          -f "event_type=on-demand-test" -F "client_payload[unit]=false" -F "client_payload[integration]=true"
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
